@@ -7,8 +7,7 @@ using Microsoft.CognitiveServices.Speech;
 namespace CSSpeech;
 public class SpeechService : ISpeechService
 {
-    private Auth auth = new Auth();
-    private Speech speech = new Speech();
+
     private SpeechConfig? config = null;
 
     public string Authenticate(Auth authentication)
