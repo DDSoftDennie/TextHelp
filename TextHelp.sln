@@ -3,7 +3,31 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31612.314
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSAuth", "CSAuth\CSAuth.csproj", "{35D62D42-43EF-459E-A915-31174D55BB03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSSpeech", "CSpeech\CSSpeech.csproj", "{BBAD5BDA-C74C-4845-B68A-8B927DC0C0E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cons", "Cons\Cons.csproj", "{6DB5B6A0-E07B-40D3-95E7-32392E72FE4E}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{35D62D42-43EF-459E-A915-31174D55BB03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35D62D42-43EF-459E-A915-31174D55BB03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35D62D42-43EF-459E-A915-31174D55BB03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35D62D42-43EF-459E-A915-31174D55BB03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBAD5BDA-C74C-4845-B68A-8B927DC0C0E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBAD5BDA-C74C-4845-B68A-8B927DC0C0E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBAD5BDA-C74C-4845-B68A-8B927DC0C0E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBAD5BDA-C74C-4845-B68A-8B927DC0C0E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DB5B6A0-E07B-40D3-95E7-32392E72FE4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DB5B6A0-E07B-40D3-95E7-32392E72FE4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DB5B6A0-E07B-40D3-95E7-32392E72FE4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DB5B6A0-E07B-40D3-95E7-32392E72FE4E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
