@@ -19,6 +19,7 @@ public class SpeechService : ISpeechService
            if(authentication.Region != "")
             {
                 config = SpeechConfig.FromSubscription(authentication.Key, authentication.Region);
+                var synth = new SpeechSynthesizer(config);  
                 result = "Authenticated!";
             }
             else
@@ -52,6 +53,13 @@ public class SpeechService : ISpeechService
         {
             result = "Please fill in the Speech Service Language!";
         }
+        return result;
+    }
+
+    public string GetAuthorizationToken()
+    {
+        string result = config.GetHashCode().ToString();
+        
         return result;
     }
 

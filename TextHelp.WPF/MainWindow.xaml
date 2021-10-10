@@ -1,0 +1,28 @@
+﻿<Window x:Class="TextHelp.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TextHelp.WPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBox Grid.Row="0" Grid.Column="0" Text="Subbscription Key.." x:Name="KeyTexBox"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Text="Region" x:Name="RegionTextBox"/>
+        <TextBox Grid.Row="0" Grid.Column="2" Text="Language" x:Name="LanguageTextBox"/>
+        <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" x:Name="TextBlock">
+            Type yourtext here
+        </TextBox>
+        <Button Grid.Row="3" Grid.Column="3" Content="Read aloud!" x:Name="ReadAloudButton" Click="ReadAloudButon_Click"/>
+    </Grid>
+</Window>

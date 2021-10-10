@@ -7,7 +7,6 @@ display.DisplayHeader();
 display.DrawLine(20);
 (string, string) credentials = ((string, string))display.AskCredentials();
 display.DisplayText(speech.Authenticate(credentials));
-
 display.DrawLine(25);
 string lang = display.AskLanguage();;
 display.DisplayText(speech.SetLanguage(lang));

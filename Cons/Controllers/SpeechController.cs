@@ -16,9 +16,9 @@ namespace Cons.Controllers
             _speechAuthService.MakeCredentials(credentials.Item1, credentials.Item2);
             _auth = _speechAuthService.GetCredentials();
             _speechService.Authenticate(_auth);
-            string result = "Authenticated";
+            string token = _speechService.GetAuthorizationToken().ToString();
 
-            return result; 
+            return token; 
         }
 
         public string SetLanguage(string lang)

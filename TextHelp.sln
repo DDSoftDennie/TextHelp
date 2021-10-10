@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31612.314
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSAuth", "CSAuth\CSAuth.csproj", "{35D62D42-43EF-459E-A915-31174D55BB03}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSAuth", "CSAuth\CSAuth.csproj", "{35D62D42-43EF-459E-A915-31174D55BB03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSSpeech", "CSpeech\CSSpeech.csproj", "{BBAD5BDA-C74C-4845-B68A-8B927DC0C0E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSSpeech", "CSpeech\CSSpeech.csproj", "{BBAD5BDA-C74C-4845-B68A-8B927DC0C0E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cons", "Cons\Cons.csproj", "{6DB5B6A0-E07B-40D3-95E7-32392E72FE4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cons", "Cons\Cons.csproj", "{6DB5B6A0-E07B-40D3-95E7-32392E72FE4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextHelp.WPF", "TextHelp.WPF\TextHelp.WPF.csproj", "{29E5C4E4-3ED4-4C45-87DF-8780311B7343}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{6DB5B6A0-E07B-40D3-95E7-32392E72FE4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DB5B6A0-E07B-40D3-95E7-32392E72FE4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DB5B6A0-E07B-40D3-95E7-32392E72FE4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29E5C4E4-3ED4-4C45-87DF-8780311B7343}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29E5C4E4-3ED4-4C45-87DF-8780311B7343}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29E5C4E4-3ED4-4C45-87DF-8780311B7343}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29E5C4E4-3ED4-4C45-87DF-8780311B7343}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -45,8 +45,9 @@ namespace Cons.Controllers
         {
             Console.WriteLine(question);
             Console.Write("> ");
-
-            return Console.ReadLine();
+            var input =  Console.ReadLine();
+            string answer = input != null ? input : "";
+            return answer;
         }
 
         public(string, string) AskCredentials()
