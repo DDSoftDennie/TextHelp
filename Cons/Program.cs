@@ -1,5 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Cons.Controllers;
+using System;
+
 DisplayController display = new DisplayController();
 SpeechController speech = new SpeechController();
 
