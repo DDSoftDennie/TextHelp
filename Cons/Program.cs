@@ -8,6 +8,7 @@ using System.Text;
 using Newtonsoft.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 
 //DisplayController display = new DisplayController();
@@ -40,13 +41,15 @@ Console.WriteLine("Please give your endpoint");
 string ep = Console.ReadLine();
 Console.WriteLine("Please enter your region: ");
 string r = Console.ReadLine();
+Console.WriteLine("Please enter text to translate: NL");
+string txt = Console.ReadLine();
 
-await TranslateMethod("Hello there! How are you doing?",k,r,ep);
-
+string translated = await CSTranslator.Translator.Translate(k, ep, txt, r);
+Console.WriteLine(translated);
 
 
 //TODO: REFACTOR:
-/* 1: TranslateMethod to Separate project
+/* 1: 
  * 2: Navigation Menu
  * 3: Work for Translate with CSAuth
  * 3.1: Remove usings & Nuget from Cons
@@ -62,34 +65,3 @@ async void SpeechMethod()
     
 }
 
-
-
-
-async Task TranslateMethod(string Text, string Key, string Location, string EndPoint)
-{
-    // Input and output languages are defined as parameters.
-    string route = "/translate?api-version=3.0&from=en&to=nl";
-    //   string textToTranslate = "Hello, world!";
-
-    object[] body = new object[] { new { Text = Text } };
-    var requestBody = JsonConvert.SerializeObject(body);
-
-    using (var client = new HttpClient())
-    using (var request = new HttpRequestMessage())
-    {
-        // Build the request.
-        request.Method = HttpMethod.Post;
-        request.RequestUri = new Uri(EndPoint + route);
-        request.Content = new StringContent(requestBody, Encoding.UTF8, "application/json");
-        request.Headers.Add("Ocp-Apim-Subscription-Key", Key);
-        request.Headers.Add("Ocp-Apim-Subscription-Region", Location);
-
-        // Send the request and get response.
-        HttpResponseMessage response = await client.SendAsync(request).ConfigureAwait(false);
-        // Read response as a string.
-        string result = await response.Content.ReadAsStringAsync();
-
-      
-        Console.WriteLine(result);
-    }
-}
