@@ -24,7 +24,7 @@ namespace Cons.Controllers
 
         public void DisplayHeader()
         {
-            Console.WriteLine("Welcome to my Speech Demo");
+            Console.WriteLine("Welcome to my Speech & Translate Demo");
             DrawLine(25);
         }
 
@@ -47,33 +47,45 @@ namespace Cons.Controllers
             return answer;
         }
 
-        public(string, string) AskCredentials()
+        public(string, string) AskSpeechCredentials()
         {
-            string key;
-            string region;
-            Console.WriteLine("Please enter your Key: ");
-            var input = Console.ReadLine();
-            key = input != null ? input: "";
-
-            Console.WriteLine("Please enter the Region: ");
-            input = Console.ReadLine();
-            region = input != null ? input : "";
+            string key = "", region = "";
+            key = AskInput("Please enter your SPEECH Key: ");
+            region = AskInput("Please enter your SPEECH Region: ");
 
             return (key, region);
             
         }
 
+        public(string, string, string) AskTranslateCredentials()
+        {
+            string key = "", region = "", endpoint = "";
+
+            key = AskInput("Please enter your TRANSLATE Key: ");
+            region = AskInput("Please enter your TRANSLATE Region: ");
+            endpoint = AskInput("Please enter your TRANSLATE endpoint: ");
+            return(key, region, endpoint);
+
+        }
+
+        public int AskWhatToDo()
+        {
+            var todo = "";
+            todo = AskInput("What do you want? (1) = Speak || (2) = Translate || (3) = Both. Please enter a number");
+            int num = 0;
+            int.TryParse(todo,out  num);
+            return num;
+        }
+
         public string AskLanguage()
         {
             string lang;
-            Console.WriteLine("Please enter the Language: ");
-            var input = Console.ReadLine();
-            lang = input != null ? input : "";
+            lang = AskInput("Please enter your SPEECH Language: ");
             return (lang);
         }
-        public  bool AskToContinue()
+        public  bool AskToContinue(string task)
         {
-            Console.WriteLine("Press 'y' to speak again.");
+            Console.WriteLine($"Press 'y' to {task} again.");
             return Console.ReadKey().Key == ConsoleKey.Y;
 
         }

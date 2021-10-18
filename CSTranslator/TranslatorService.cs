@@ -2,15 +2,34 @@
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Text;
+using CSAuth.Model;
 
 namespace CSTranslator
 {
-    public static class Translator
+    public class TranslatorService
     {
-        //   public string Key { get; set; }
-        //    public string Endpoint { get; set; }
+        private string key = "", region = "", endpoint = "";
 
-        public static async Task<string> Translate(string Key, string EndPoint, string Text, string Location)
+
+        public string Authenticate(Auth authentication)
+        {
+            string result;
+
+            if (authentication.Key != "" && authentication.Region !="" && authentication.EndPoint !="")
+            {
+              key = authentication.Key;
+              region = authentication.Region;
+              endpoint = authentication.EndPoint;
+              result = "Authenticated!";
+            }
+            else
+            {
+                result = "Please fill in the right Credentials!";
+            }
+            return result;
+        }
+
+        public async Task<string> Translate(string Text)
         {
             string route = "/translate?api-version=3.0&from=nl&to=en";
 
@@ -22,10 +41,10 @@ namespace CSTranslator
             {
                 // Build the request.
                 request.Method = HttpMethod.Post;
-                request.RequestUri = new Uri(EndPoint + route);
+                request.RequestUri = new Uri(endpoint + route);
                 request.Content = new StringContent(requestBody, Encoding.UTF8, "application/json");
-                request.Headers.Add("Ocp-Apim-Subscription-Key", Key);
-                request.Headers.Add("Ocp-Apim-Subscription-Region", Location);
+                request.Headers.Add("Ocp-Apim-Subscription-Key", key);
+                request.Headers.Add("Ocp-Apim-Subscription-Region", region);
 
                 // Send the request and get response.
                 HttpResponseMessage response = await client.SendAsync(request).ConfigureAwait(false);

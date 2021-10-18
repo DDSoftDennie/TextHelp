@@ -12,6 +12,8 @@ namespace CSAuth.Model
 
         public string? Region { get; set; }
 
+        public string? EndPoint { get; set; }
+
        public Auth()
         {
 
@@ -21,6 +23,13 @@ namespace CSAuth.Model
         {
             this.Region = Region;
             this.Key = Key;
+        }
+
+        public Auth(string Key, string Region, string EndPoint)
+        {
+            this.Region = Region;
+            this.Key = Key;
+            this.EndPoint = EndPoint;
         }
 
     }

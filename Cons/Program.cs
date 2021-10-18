@@ -1,67 +1,84 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Cons.Controllers;
-using System;
-using CSTranslator;
-using System.Net.Http;
-using System.Net;
-using System.Text;
-using Newtonsoft.Json;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 
+DisplayController display = new DisplayController();
+SpeechController speech = new SpeechController();
+TranslateController translate = new TranslateController();
 
-//DisplayController display = new DisplayController();
-//SpeechController speech = new SpeechController();
+display.DisplayHeader();
+display.DrawLine(5);
 
-//display.DisplayHeader();
-//display.DrawLine(20);
-//(string, string) credentials = ((string, string))display.AskCredentials();
-//display.DisplayText(speech.Authenticate(credentials));
-//display.DrawLine(25);
-//string lang = display.AskLanguage(); ;
-//display.DisplayText(speech.SetLanguage(lang));
-//display.DrawLine(150);
-
-//bool mayContinue;
-//do
-//{
-//    string input = display.AskInput("Type a text you want to read aloud...");
-//    display.DisplayText(await speech.ReadAloud(input));
-//    display.DrawLine(25);
-//    mayContinue = display.AskToContinue();
-//} while (mayContinue);
-
-//display.DisplayFooter();
-//Console.ReadKey();
-
-Console.WriteLine("Please give your Key");
-string k = Console.ReadLine();
-Console.WriteLine("Please give your endpoint");
-string ep = Console.ReadLine();
-Console.WriteLine("Please enter your region: ");
-string r = Console.ReadLine();
-Console.WriteLine("Please enter text to translate: NL");
-string txt = Console.ReadLine();
-
-string translated = await CSTranslator.Translator.Translate(k, ep, txt, r);
-Console.WriteLine(translated);
-
-
-//TODO: REFACTOR:
-/* 1: 
- * 2: Navigation Menu
- * 3: Work for Translate with CSAuth
- * 3.1: Remove usings & Nuget from Cons
- * 4: Implement Translate & Speech 
- * 5: Implement in WPF
- * 6: Work all warnings away
- * 7: NOT SURE: Consistancy: REST way for CSSPeech
- *      *If: make Interface for speech to speech
- * */
-
-async void SpeechMethod()
+int todo = display.AskWhatToDo();
+if(todo == 1)
 {
-    
+    await SpeechMethod();
+} else if (todo == 2)
+{
+    await TranslateMethod();
+} else if(todo == 3)
+{
+    await TranslateAndSpeakMethod();
+}
+display.DisplayFooter();
+
+
+ async Task SpeechMethod()
+{
+    (string, string) credentials = ((string, string))display.AskSpeechCredentials();
+    display.DisplayText(speech.Authenticate(credentials));
+    display.DrawLine(5);
+    string lang = "en-EN";
+    display.DisplayText(speech.SetLanguage(lang));
+    display.DrawLine(5);
+
+    bool mayContinue;
+    do
+    {
+        string input = display.AskInput("Type a text you want to read aloud...");
+        display.DisplayText(await speech.ReadAloud(input));
+        display.DrawLine(5);
+        mayContinue = display.AskToContinue("speak");
+    } while (mayContinue);
+}
+
+async Task TranslateMethod()
+{
+    (string, string, string) credentials = ((string, string, string))display.AskTranslateCredentials();
+    display.DisplayText(translate.Authenticate(credentials));
+    display.DrawLine(10);
+
+    bool mayContinue;
+    do
+    {
+        string input = display.AskInput("Type a NL text to translate to EN: ");
+        display.DisplayText(await translate.Translate(input));
+        display.DrawLine(10);
+        mayContinue = display.AskToContinue("translate");
+    }while(mayContinue);
+}
+
+async Task TranslateAndSpeakMethod()
+{
+    (string, string, string) translateCredentials = ((string, string, string))display.AskTranslateCredentials();
+    display.DisplayText(translate.Authenticate(translateCredentials));
+    display.DrawLine(10);
+
+    (string, string) speechCredentials = ((string, string))display.AskSpeechCredentials();
+    display.DisplayText(speech.Authenticate(speechCredentials));
+    display.DrawLine(10);
+    string lang = "en-EN";
+    speech.SetLanguage(lang);
+
+    bool mayContinue;
+    do
+    {
+        string input = display.AskInput("Type a NL text to translate to EN: ");
+        string translated = await translate.Translate(input);
+        display.DisplayText(translated);
+        display.DisplayText(await speech.ReadAloud(translated));
+        display.DrawLine(10);
+        mayContinue = display.AskToContinue("both");
+    } while (mayContinue);
 }
 

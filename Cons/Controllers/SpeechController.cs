@@ -18,9 +18,8 @@ namespace Cons.Controllers
             _speechAuthService.MakeCredentials(credentials.Item1, credentials.Item2);
             _auth = _speechAuthService.GetCredentials();
             _speechService.Authenticate(_auth);
-            string token = _speechService.GetAuthorizationToken().ToString();
 
-            return token; 
+            return "Authenticated!"; 
         }
 
         public string SetLanguage(string lang)
@@ -31,14 +30,14 @@ namespace Cons.Controllers
             };
             _speechService.Configure(_speech);
 
-            string result = "Language set!";
-            return result;
+         
+            return "Language set!";
         }
 
         public async Task< string> ReadAloud(string text)
         {
             await _speechService.ReadAloud(text);
-            return "Speech for '{text}' performed";
+            return $"Speech for '{text}' performed";
         }
     }
 }
