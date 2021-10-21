@@ -11,7 +11,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cons", "Cons\Cons.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TextHelp.WPF", "TextHelp.WPF\TextHelp.WPF.csproj", "{29E5C4E4-3ED4-4C45-87DF-8780311B7343}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSTranslator", "CSTranslator\CSTranslator.csproj", "{5287C2EA-7856-4983-ADDD-58A56B3921BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSTranslator", "CSTranslator\CSTranslator.csproj", "{5287C2EA-7856-4983-ADDD-58A56B3921BE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Slidedeck", "Slidedeck", "{3716548E-1E28-4F0C-959D-BF742740E296}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\Users\dpcfr\Downloads\AI for the Better Global AI Pune 21102021.pdf = ..\..\..\..\Users\dpcfr\Downloads\AI for the Better Global AI Pune 21102021.pdf
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
