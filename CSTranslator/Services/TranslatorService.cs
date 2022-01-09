@@ -6,7 +6,7 @@ using CSAuth.Model;
 
 namespace CSTranslator.Services
 {
-    public class TranslatorService
+    public class TranslatorService : ITranslatorService
     {
         private string key = "", region = "", endpoint = "";
 
@@ -15,7 +15,7 @@ namespace CSTranslator.Services
         {
             string result;
 
-            if (authentication.Key != "" && authentication.Region !="" && authentication.EndPoint !="")
+            if (authentication != null & authentication.Key != "" && authentication.Region !="" && authentication.EndPoint !="")
             {
               key = authentication.Key;
               region = authentication.Region;
@@ -29,11 +29,11 @@ namespace CSTranslator.Services
             return result;
         }
 
-        public async Task<string> Translate(string Text)
+        public async Task<string> Translate(string text)
         {
             string route = "/translate?api-version=3.0&from=nl&to=en";
 
-            object[] body = new object[] { new { Text = Text } };
+            object[] body = new object[] { new { Text = text } };
             var requestBody = JsonConvert.SerializeObject(body);
 
             using (var client = new HttpClient())
