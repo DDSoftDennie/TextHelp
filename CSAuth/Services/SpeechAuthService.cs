@@ -21,7 +21,9 @@ namespace CSAuth.Services
 
         public void MakeCredentials(string Key, string Region, string EndPoint)
         {
-            throw new NotImplementedException();
+            auth.Key = Key;
+            auth.Region = Region;
+            auth.EndPoint = EndPoint;
         }
     }
 }

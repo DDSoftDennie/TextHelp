@@ -10,7 +10,8 @@ namespace CSSpeech.Services
     {
 
         private SpeechConfig? config = null;
-
+   
+       
         public string Authenticate(Auth authentication)
         {
             string result;
@@ -65,12 +66,21 @@ namespace CSSpeech.Services
             return result;
         }
 
-        public async Task ReadAloud(string text)
+        public async Task<int> ReadAloud(string text)
         {
+            int length = text.Length;
             using (SpeechSynthesizer synth = new SpeechSynthesizer(config))
             {
                 await synth.SpeakTextAsync(text);
             }
+            return length;
+        }
+
+        public int GetTotalCharacters(Speech speech) => speech.TotalChar;
+
+        public void SetStartCharacters(Speech speech, int startCharacters)
+        {
+            speech.TotalChar = startCharacters;
         }
     }
 

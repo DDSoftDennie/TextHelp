@@ -1,7 +1,5 @@
-﻿using CSAuth;
-using CSAuth.Model;
+﻿using CSAuth.Model;
 using CSAuth.Services;
-using CSSpeech;
 using CSSpeech.Model;
 using CSSpeech.Services;
 using System.Threading.Tasks;
@@ -36,10 +34,21 @@ namespace Cons.Controllers
             return "Language set!";
         }
 
+        public string SetStartCharacters(int characters)
+        {
+            _speechService.SetStartCharacters(_speech, characters);
+            return "Initial characters set!";
+        }
+
         public async Task< string> ReadAloud(string text)
         {
-            await _speechService.ReadAloud(text);
-            return $"Speech for '{text}' performed";
+           int length =  await _speechService.ReadAloud(text);
+           return $"Speech for '{text}' performed. {length} characters were computed.";
+        }
+
+        public string GetTotalCharacters()
+        {
+            return $"The total of charactes is: {_speech.TotalChar}.";
         }
     }
 }

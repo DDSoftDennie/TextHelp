@@ -10,6 +10,10 @@ namespace CSSpeech.Services
 
         public string Configure(Speech speech);
 
-        public Task ReadAloud(string text);
+        public Task<int> ReadAloud(string text);
+
+        public int GetTotalCharacters(Speech speech);
+
+        public void SetStartCharacters(Speech speech, int startCharacters);
     }
 }
