@@ -1,6 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿
 using Newtonsoft.Json;
-using System.Net.Http;
 using System.Text;
 using CSAuth.Model;
 

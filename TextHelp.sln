@@ -20,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Slidedeck", "Slidedeck", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cred", "cred", "{ABF49A06-2F85-457B-A186-02E4386F2D22}"
 	ProjectSection(SolutionItems) = preProject
-		keys.txt = keys.txt
+		cred.txt = cred.txt
 	EndProjectSection
 EndProject
 Global
