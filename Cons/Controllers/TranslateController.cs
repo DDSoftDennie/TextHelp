@@ -1,7 +1,7 @@
-﻿using CSTranslator;
-using CSTranslator.Model;
-using CSAuth;
+﻿using CSTranslator.Model;
+using CSTranslator.Services;
 using CSAuth.Model;
+using CSAuth.Services;
 using System.Threading.Tasks;
 
 namespace Cons.Controllers

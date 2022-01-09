@@ -1,5 +1,5 @@
-﻿using CSAuth;
-using CSSpeech;
+﻿using CSAuth.Services;
+using CSSpeech.Services;
 using System;
 using System.Text;
 
@@ -9,7 +9,7 @@ namespace Cons.Controllers
    public class DisplayController
     {
         private SpeechAuthService _Auth = new SpeechAuthService();
-        private SpeechService _speech = new SpeechService();
+        private SDKSpeechService _speech = new SDKSpeechService();
 
         public void DrawLine(int length)
         {

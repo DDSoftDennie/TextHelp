@@ -1,7 +1,7 @@
 ﻿using CSAuth.Model;
 
 
-namespace CSAuth
+namespace CSAuth.Services
 {
     public interface IAuthService
     {

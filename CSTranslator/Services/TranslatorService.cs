@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Text;
 using CSAuth.Model;
 
-namespace CSTranslator
+namespace CSTranslator.Services
 {
     public class TranslatorService
     {

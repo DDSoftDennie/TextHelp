@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CSAuth;
-using CSSpeech;
-using CSAuth.Model;
 using CSSpeech.Model;
+using CSSpeech.Services;
+using CSAuth.Model;
+using CSAuth.Services;
+
 using System.Windows;
 
 namespace TextHelp.WPF
@@ -18,7 +19,7 @@ namespace TextHelp.WPF
     {
 
         private SpeechAuthService _speechAuthService = new SpeechAuthService();
-        private SpeechService _speechService = new SpeechService();
+        private SDKSpeechService _speechService = new SDKSpeechService();
         private Auth _auth = new Auth();
         private Speech _speech = new Speech();
 

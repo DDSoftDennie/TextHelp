@@ -1,7 +1,9 @@
 ﻿using CSAuth;
 using CSAuth.Model;
+using CSAuth.Services;
 using CSSpeech;
 using CSSpeech.Model;
+using CSSpeech.Services;
 using System.Threading.Tasks;
 
 
@@ -10,7 +12,7 @@ namespace Cons.Controllers
     public class SpeechController
     {
         private SpeechAuthService _speechAuthService = new SpeechAuthService();
-        private SpeechService _speechService = new SpeechService();
+        private SDKSpeechService _speechService = new SDKSpeechService();
         private Auth _auth = new Auth();
         private Speech _speech = new Speech();
         public string Authenticate((string, string)credentials)
