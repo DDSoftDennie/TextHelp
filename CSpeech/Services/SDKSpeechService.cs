@@ -9,42 +9,42 @@ namespace CSSpeech.Services
     public class SDKSpeechService : ISpeechService
     {
 
-        private SpeechConfig? config = null;
-   
-       
-        public string Authenticate(Auth authentication)
+        private SpeechConfig? _config;
+        private Speech _speech;
+
+        public SDKSpeechService()
         {
-            string result;
-
-            if (authentication.Key != "")
-            {
-                if (authentication.Region != "")
-                {
-                    config = SpeechConfig.FromSubscription(authentication.Key, authentication.Region);
-                    var synth = new SpeechSynthesizer(config);
-                    result = "Authenticated!";
-                }
-                else
-                {
-                    result = "Please fill in the Speech Service Region!";
-                }
-            }
-            else
-            {
-                result = "Please fill in the Speech Service Key!";
-            }
-            return result;
-
+            _speech = new Speech();
         }
 
-        public string Configure(Speech speech)
+        public SDKSpeechService(Auth authentication)
+        {
+            _speech = new Speech();
+            _config = Authenticate(authentication);
+        }
+       
+        public SpeechConfig? Authenticate(Auth authentication)
+        {
+            SpeechConfig config;
+            if(authentication == null)
+            {
+                return null;
+            }
+            config = SpeechConfig.FromSubscription(authentication.Key, authentication.Region);    
+            var synth = new SpeechSynthesizer(config);
+            Configure();
+            return config;
+           
+        }
+
+        private string Configure()
         {
             string result;
-            if (speech.Language != "")
+            if (_speech.Language != "")
             {
-                if (config != null)
+                if (_config != null)
                 {
-                    config.SpeechSynthesisLanguage = speech.Language;
+                    _config.SpeechSynthesisLanguage = _speech?.Language;
                     result = "Speech configured!";
                 }
                 else
@@ -59,29 +59,37 @@ namespace CSSpeech.Services
             return result;
         }
 
-        public string GetAuthorizationToken()
+        public void SetStartCharacters(int startCharacters)
         {
-            string result = config.GetHashCode().ToString();
+            if (_speech != null)
+            {
+                _speech.TotalChar = startCharacters;
+            }
+        }
 
-            return result;
+        public void SetLanguage(string language)
+        {
+            _speech.Language = language;
         }
 
         public async Task<int> ReadAloud(string text)
         {
             int length = text.Length;
-            using (SpeechSynthesizer synth = new SpeechSynthesizer(config))
+            using (SpeechSynthesizer synth = new SpeechSynthesizer(_config))
             {
                 await synth.SpeakTextAsync(text);
             }
+            _speech.TotalChar += length;
             return length;
         }
 
-        public int GetTotalCharacters(Speech speech) => speech.TotalChar;
+        public int GetTotalCharacters() => _speech?.TotalChar != null ? _speech.TotalChar : 0;
 
-        public void SetStartCharacters(Speech speech, int startCharacters)
-        {
-            speech.TotalChar = startCharacters;
-        }
+        public string GetAutorizationToken() => _config?.GetHashCode().ToString() != null ? _config.GetHashCode().ToString() : "";
+
+        public Speech GetSpeech()=> _speech;
+
+ 
     }
 
 

@@ -1,19 +1,24 @@
 ﻿using CSAuth.Model;
-using CSSpeech.Model;
 using System.Threading.Tasks;
+using CSSpeech.Model;
+using Microsoft.CognitiveServices.Speech;
 
 namespace CSSpeech.Services
 {
    public interface ISpeechService
     {
-        public string Authenticate(Auth authentication);
 
-        public string Configure(Speech speech);
+        public SpeechConfig Authenticate(Auth authentication);
 
         public Task<int> ReadAloud(string text);
 
-        public int GetTotalCharacters(Speech speech);
+        public int GetTotalCharacters();
+        public string GetAutorizationToken();
 
-        public void SetStartCharacters(Speech speech, int startCharacters);
+        public Speech GetSpeech();
+
+        public void SetStartCharacters(int startCharacters);
+
+        public void SetLanguage(string language);
     }
 }

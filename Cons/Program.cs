@@ -31,8 +31,6 @@ display.DisplayFooter();
     string lang = "en-EN";
     display.DisplayText(speech.SetLanguage(lang));
     display.DrawLine(5);
-    display.DisplayText(speech.SetStartCharacters(200));
-    display.DrawLine(5);
 
     bool mayContinue;
     do

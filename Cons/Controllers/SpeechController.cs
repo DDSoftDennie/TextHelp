@@ -1,46 +1,39 @@
-﻿using CSAuth.Model;
-using CSAuth.Services;
-using CSSpeech.Model;
+﻿using CSAuth.Services;
 using CSSpeech.Services;
 using System.Threading.Tasks;
-
 
 namespace Cons.Controllers
 {
     public class SpeechController
     {
-        private SpeechAuthService _speechAuthService = new SpeechAuthService();
-        private SDKSpeechService _speechService = new SDKSpeechService();
-        private Auth _auth = new Auth();
-        private Speech _speech = new Speech();
+        private SpeechAuthService _speechAuthService;
+        private SDKSpeechService? _speechService;
+
+       public  SpeechController()
+        {
+            _speechAuthService = new SpeechAuthService();
+        }
         public string Authenticate((string, string)credentials)
         {
+   
             _speechAuthService.MakeCredentials(credentials.Item1, credentials.Item2);
-            _auth = _speechAuthService.GetCredentials();
-            _speechService.Authenticate(_auth);
-
+            _speechService = new SDKSpeechService(_speechAuthService.GetCredentials());
             return "Authenticated!"; 
         }
 
         public string SetLanguage(string lang)
         {
-            _speech = new Speech
-            {
-                Language = lang
-            };
-            _speechService.Configure(_speech);
-
-         
+            _speechService?.SetLanguage(lang);   
             return "Language set!";
         }
 
         public string SetStartCharacters(int characters)
         {
-            _speechService.SetStartCharacters(_speech, characters);
+            _speechService?.SetStartCharacters(characters);
             return "Initial characters set!";
         }
 
-        public async Task< string> ReadAloud(string text)
+        public async Task<string> ReadAloud(string text)
         {
            int length =  await _speechService.ReadAloud(text);
            return $"Speech for '{text}' performed. {length} characters were computed.";
@@ -48,7 +41,7 @@ namespace Cons.Controllers
 
         public string GetTotalCharacters()
         {
-            return $"The total of charactes is: {_speech.TotalChar}.";
+            return $"The total of charactes is: {_speechService.GetTotalCharacters()}.";
         }
     }
 }

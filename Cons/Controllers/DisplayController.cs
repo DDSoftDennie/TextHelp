@@ -8,8 +8,8 @@ namespace Cons.Controllers
 {
    public class DisplayController
     {
-        private SpeechAuthService _Auth = new SpeechAuthService();
-        private SDKSpeechService _speech = new SDKSpeechService();
+       // private SpeechAuthService _Auth = new SpeechAuthService();
+       //  private SDKSpeechService _speech = new SDKSpeechService();
 
         public void DrawLine(int length)
         {
@@ -49,7 +49,7 @@ namespace Cons.Controllers
 
         public(string, string) AskSpeechCredentials()
         {
-            string key = "", region = "";
+            string key, region ;
             key = AskInput("Please enter your SPEECH Key: ");
             region = AskInput("Please enter your SPEECH Region: ");
 
@@ -59,7 +59,7 @@ namespace Cons.Controllers
 
         public(string, string, string) AskTranslateCredentials()
         {
-            string key = "", region = "", endpoint = "";
+            string key, region, endpoint;
 
             key = AskInput("Please enter your TRANSLATE Key: ");
             region = AskInput("Please enter your TRANSLATE Region: ");
@@ -70,9 +70,9 @@ namespace Cons.Controllers
 
         public int AskWhatToDo()
         {
-            var todo = "";
+            string todo;
             todo = AskInput("What do you want? (1) = Speak || (2) = Translate || (3) = Both. Please enter a number");
-            int num = 0;
+            int num ;
             int.TryParse(todo,out  num);
             return num;
         }
@@ -81,13 +81,12 @@ namespace Cons.Controllers
         {
             string lang;
             lang = AskInput("Please enter your SPEECH Language: ");
-            return (lang);
+            return lang;
         }
         public  bool AskToContinue(string task)
         {
             Console.WriteLine($"Press 'y' to {task} again.");
             return Console.ReadKey().Key == ConsoleKey.Y;
-
         }
 
 
