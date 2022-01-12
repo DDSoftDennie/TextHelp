@@ -89,7 +89,15 @@ namespace CSSpeech.Services
 
         public Speech GetSpeech()=> _speech;
 
- 
+        public void Authenticate(Auth authentication, bool rest = true)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<string> GetAutorizationTokenAsync(string s1, string s2)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 
 

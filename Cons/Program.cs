@@ -25,8 +25,10 @@ display.DisplayFooter();
 
  async Task SpeechMethod()
 {
-    (string, string) credentials = ((string, string))display.AskSpeechCredentials();
+   (string, string) credentials = ((string, string))display.AskSpeechCredentials();
     display.DisplayText(speech.Authenticate(credentials));
+   // (string, string, string) credentials = ((string, string, string))display.AskSpeechRESTCredentials();
+  //  display.DisplayText(speech.AuthenticateREST(credentials));
     display.DrawLine(5);
     string lang = "en-EN";
     display.DisplayText(speech.SetLanguage(lang));

@@ -7,8 +7,8 @@ namespace Cons.Controllers
     public class SpeechController
     {
         private SpeechAuthService _speechAuthService;
-        private SDKSpeechService? _speechService;
-
+       private ISpeechService? _speechService;
+ 
        public  SpeechController()
         {
             _speechAuthService = new SpeechAuthService();
@@ -21,6 +21,12 @@ namespace Cons.Controllers
             return "Authenticated!"; 
         }
 
+        public string AuthenticateREST((string, string, string)credentials)
+        {
+            _speechAuthService.MakeCredentials(credentials.Item1, credentials.Item2, credentials.Item3);
+            _speechService = new RESTSpeechService(_speechAuthService.GetCredentials());
+            return "REST Authenticated!";
+        }
         public string SetLanguage(string lang)
         {
             _speechService?.SetLanguage(lang);   

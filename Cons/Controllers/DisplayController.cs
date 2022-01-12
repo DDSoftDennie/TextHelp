@@ -52,12 +52,19 @@ namespace Cons.Controllers
             string key, region ;
             key = AskInput("Please enter your SPEECH Key: ");
             region = AskInput("Please enter your SPEECH Region: ");
-
             return (key, region);
-            
         }
 
-        public(string, string, string) AskTranslateCredentials()
+        public (string, string, string) AskSpeechRESTCredentials()
+        {
+            string key, region, endpoint;
+            key = AskInput("Please enter your SPEECH Key: ");
+            region = AskInput("Please enter your SPEECH Region: ");
+            endpoint = AskInput("Please enter your SPEECH Endpoint: ");
+            return (key, region, endpoint);
+        }
+
+        public (string, string, string) AskTranslateCredentials()
         {
             string key, region, endpoint;
 

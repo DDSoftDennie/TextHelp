@@ -17,12 +17,25 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBox Grid.Row="0" Grid.Column="0" Text="Subbscription Key.." x:Name="KeyTexBox"/>
-        <TextBox Grid.Row="0" Grid.Column="1" Text="Region" x:Name="RegionTextBox"/>
-        <TextBox Grid.Row="0" Grid.Column="2" Text="Language" x:Name="LanguageTextBox"/>
-        <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" x:Name="TextBlock">
-            Type yourtext here
-        </TextBox>
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <Label>Subscription Key</Label>
+            <TextBox Grid.Row="0" Grid.Column="0" x:Name="KeyTexBox" FontSize="18" FontWeight="Bold" BorderBrush="Black"/>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <Label>Region</Label>
+            <TextBox x:Name="RegionTextBox" FontSize="18" FontWeight="Bold" BorderBrush="Black"/>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="2">
+            <Label>Language</Label>
+            <TextBox x:Name="LanguageTextBox" FontSize="18" FontWeight="Bold" BorderBrush="Black"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+            <Label>Type text here...</Label>
+            <TextBox x:Name="TextBlock" FontSize="18" Background="Beige" Height="257">
+
+            </TextBox>
+        </StackPanel>
+        
         <Button Grid.Row="3" Grid.Column="3" Content="Read aloud!" x:Name="ReadAloudButton" Click="ReadAloudButon_Click"/>
     </Grid>
 </Window>
