@@ -20,8 +20,9 @@ namespace TextHelp.WPF
 
         private async void ReadAloudButon_Click(object sender, RoutedEventArgs e)
         {
-          
-            var config = SpeechConfig.FromSubscription(KeyTexBox.Text, RegionTextBox.Text);
+            Credentials.Region = RegionTextBox.Text;
+            Credentials.Key = KeyTexBox.Text;
+            var config = SpeechConfig.FromSubscription(Credentials.Key,Credentials.Region);
 
             using (SpeechSynthesizer synth = new SpeechSynthesizer(config))
             {
@@ -30,6 +31,10 @@ namespace TextHelp.WPF
 
         }
 
-
+        private void HelpButton_Click(object sender, RoutedEventArgs e)
+        {
+            HelpWindow helpWindow = new HelpWindow();
+            helpWindow.Show();
+        }
     }
 }

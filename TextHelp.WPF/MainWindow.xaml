@@ -35,7 +35,7 @@
 
             </TextBox>
         </StackPanel>
-        
+        <Button Grid.Row="3" Grid.Column="0" Content="Help" x:Name="HelpButton" Click="HelpButton_Click" />
         <Button Grid.Row="3" Grid.Column="3" Content="Read aloud!" x:Name="ReadAloudButton" Click="ReadAloudButon_Click"/>
     </Grid>
 </Window>
