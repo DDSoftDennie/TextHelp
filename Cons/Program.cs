@@ -25,11 +25,20 @@ display.DisplayFooter();
 
  async Task SpeechMethod()
 {
-   (string, string) credentials = ((string, string))display.AskSpeechCredentials();
+  
+
+
+    //SDK
+    (string, string) credentials = ((string, string))display.AskSpeechCredentials();
     display.DisplayText(speech.Authenticate(credentials));
+   
+
+    //REST
    // (string, string, string) credentials = ((string, string, string))display.AskSpeechRESTCredentials();
-  //  display.DisplayText(speech.AuthenticateREST(credentials));
-    display.DrawLine(5);
+   //  display.DisplayText(speech.AuthenticateREST(credentials));
+  
+
+     display.DrawLine(5);
     string lang = "en-EN";
     display.DisplayText(speech.SetLanguage(lang));
     display.DrawLine(5);
@@ -38,7 +47,16 @@ display.DisplayFooter();
     do
     {
         string input = display.AskInput("Type a text you want to read aloud...");
-        display.DisplayText(await speech.ReadAloud(input));
+      
+
+        //REST Save to file
+       // await speech.SetAcessToken(credentials.Item3, credentials.Item1);
+       // string fileName = display.AskInput("Enter file name:");
+       // await speech.WriteToFile(input, fileName);
+
+        //SDK Speech and Read Aloud
+         display.DisplayText(await speech.ReadAloud(input));
+
         display.DisplayText(speech.GetTotalCharacters());
         display.DrawLine(5);
         mayContinue = display.AskToContinue("speak");
@@ -61,6 +79,8 @@ async Task TranslateMethod()
     }while(mayContinue);
 }
 
+
+
 async Task TranslateAndSpeakMethod()
 {
     (string, string, string) translateCredentials = ((string, string, string))display.AskTranslateCredentials();
@@ -79,7 +99,7 @@ async Task TranslateAndSpeakMethod()
         string input = display.AskInput("Type a NL text to translate to EN: ");
         string translated = await translate.Translate(input);
         display.DisplayText(translated);
-        display.DisplayText(await speech.ReadAloud(translated));
+       // display.DisplayText(await speech.ReadAloud(translated));
         display.DrawLine(10);
         mayContinue = display.AskToContinue("both");
     } while (mayContinue);

@@ -6,6 +6,9 @@ namespace CSSpeech.Model
         public string? Language { get; set; }
         public int TotalChar { get; set; }
 
+        public string AccessToken { get; set; }
+
+
         public Speech()
         {
 

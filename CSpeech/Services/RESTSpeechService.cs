@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using CSAuth;
 using System.Net.Http;
 using System.Text;
+using System.IO;
+using System.Media;
 
 namespace CSSpeech.Services
 {
@@ -15,10 +17,10 @@ namespace CSSpeech.Services
         private string _key ="", _region="", _endpoint="", _lang="";
         private string _requestBody="";
         public static readonly string FetchTokenUri = "https://northeurope.api.cognitive.microsoft.com/sts/v1.0/issueToken";
-
-
-
         private Speech _speech;
+
+
+
 
         public RESTSpeechService()
         {
@@ -27,7 +29,7 @@ namespace CSSpeech.Services
 
         public RESTSpeechService(Auth authentication)
         {
-            _speech = new Speech();
+           _speech = new Speech();
             Authenticate(authentication,true);
         }
         public SpeechConfig Authenticate(Auth authentication)
@@ -57,47 +59,83 @@ namespace CSSpeech.Services
             throw new NotImplementedException();
         }
 
-        public Task<string> GetAutorizationTokenAsync(string fetchUri, string subscriptionKey)
+        public async Task SetAutorizationTokenAsync(string fetchUri, string subscriptionKey)
+        {
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", subscriptionKey);
+            var response = await client.PostAsync("https://northeurope.api.cognitive.microsoft.com/sts/v1.0/issueToken", null);
+             _speech.AccessToken = await response.Content.ReadAsStringAsync();
+          
+        }
+
+        public Task<int> ReadAloud(string text)
         {
             throw new NotImplementedException();
-            //fetchuri = https://northeurope.tts.speech.microsoft.com/cognitiveservices/v1
-            //using (var client = new HttpClient())
-            //{
-            //    client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", subscriptionKey);
-            //    UriBuilder uriBuilder = new UriBuilder(fetchUri);
-
-            //    var result = await client.PostAsync(uriBuilder.Uri.AbsoluteUri, null);
-            //   // Console.WriteLine("Token Uri: {0}", uriBuilder.Uri.AbsoluteUri);
-            //    return await result.Content.ReadAsStringAsync();
-            //}
         }
-        public async Task<int> ReadAloud(string text)
+
+        public async Task<string> ReadAloud(string text, string accessToken)
         {
-            string body = "<speak version='1.0' xml:lang='en-US'><voice xml:lang='" + _speech.Language +"' xml:gender='Male' name = 'en-US-ChristopherNeural'>" + text + " </voice></speak>";
-            using (var client = new HttpClient())
-            using (var request = new HttpRequestMessage())
+
+            throw new NotImplementedException();
+
+            //if (result == null || result.ToString() == null)
+            //{
+            //    return "";
+            //} else
+           
+            //return result.ToString();
+           
+        }
+        public async Task WriteToFile(string text, string name)
+        {
+            string path = @"C:\DDSoft\AI Demos\TextHelp\TextHelp\Output\" + name + ".mp3";
+           
+            var readStream = await GetTTS(_speech.AccessToken, text);
+
+            FileStream writeStream = File.Create(path);
+            int Length = 256;
+            Byte[] buffer = new Byte[Length];
+
+            int bytestoRead = readStream.Read(buffer, 0, Length);
+            while (bytestoRead > 0)
             {
-                request.Method = HttpMethod.Post;
-                request.RequestUri = new Uri(_endpoint);
-                request.Content = new StringContent(body, Encoding.UTF8, "application/ssml+xml");
-                request.Headers.Add("Ocp-Apim-Subscription-Key", _key);
-                request.Headers.Add("Host", _region+ ".tts.speech.microsoft.com");
-                request.Headers.Add("X-Microsoft-OutputFormat", "webm-16khz-16bit-mono-opus");
-               // request.Headers.Add("Content-Type", "application/ssml+xml");
-               // request.Headers.Add("Content-Length", text.Length.ToString());
-                request.Headers.Add("User-Agent", "TextHelp");
-
-                HttpResponseMessage response = await client.SendAsync(request).ConfigureAwait(false);
-
-                var responseBody = await response.Content.ReadAsStringAsync();
-
-                int length = text.Length;
-                _speech.TotalChar += length;
-                return length;
+                writeStream.Write(buffer, 0, bytestoRead);
+                bytestoRead = readStream.Read(buffer, 0, Length);
             }
+
+            readStream.Close();
+            writeStream.Close();
+
+          //  SoundPlayer player = new System.Media.SoundPlayer(filename);
+          //  player.PlaySync();
+          
+            
+            //using (var stream = File.Create(path))
+            //{
+            //    fileStream.Seek(0, SeekOrigin.Begin);
+            //    fileStream.CopyTo(stream);
+            //}
+
         }
 
-   
+       
+        private async Task<Stream> GetTTS(string accessToken, string text)
+        {
+
+            string body = "<speak version='1.0' xml:lang='en-US'><voice xml:lang='" + _speech.Language + "' xml:gender='Male' name = 'en-US-ChristopherNeural'>" + text + " </voice></speak>";
+
+            HttpClient client = new HttpClient();
+            HttpContent content = new StringContent(body);
+           
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/ssml+xml");
+            client.DefaultRequestHeaders.Add("X-Microsoft-OutputFormat", "riff-16khz-16bit-mono-pcm");
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+            client.DefaultRequestHeaders.Add("User-Agent", "TextHelp");
+            HttpResponseMessage response = await client.PostAsync(_endpoint, content);
+
+            return  await response.Content.ReadAsStreamAsync();
+
+        }
         public void SetLanguage(string language)
         {
             _lang = language;
@@ -113,8 +151,13 @@ namespace CSSpeech.Services
 
         public Speech GetSpeech() => _speech;
 
+        public void SetSpeech(Speech speech)
+        {
+            this._speech = speech;
+        }
+
         public int GetTotalCharacters() => _speech?.TotalChar != null ? _speech.TotalChar : 0;
 
-     
+  
     }
 }

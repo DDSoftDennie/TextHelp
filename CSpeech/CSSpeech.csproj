@@ -8,6 +8,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.CognitiveServices.Speech" Version="1.18.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="System.Windows.Extensions" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
