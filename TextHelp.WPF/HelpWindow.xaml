@@ -8,12 +8,15 @@
         Title="HelpWindow" Height="450" Width="800">
     <Grid>
         <StackPanel>
-            <TextBlock x:Name="TextBlock" FontSize="18">
-                1. How do I use this app? <LineBreak/>
-                - You can use this app to write text and listen to the text. <LineBreak/>
-                - You can use this app together with someone with a learning disability, <LineBreak/>
-                    if you do this, the caregiver can write text and let it read aload to the person with special needs. <LineBreak/>
-                - You ccan paste text in this app and let this read aloud.
+            <TextBlock x:Name="TextBlock" FontSize="18" TextWrapping="Wrap">
+                 How do I use this app? 
+                <LineBreak />
+                - You can use this app to write text and listen to the text.
+               <LineBreak />
+                - You can use this app together with someone with a learning disability,
+                    if you do this, the caregiver can write text and let it read aload to the person with special needs.
+              <LineBreak />
+                - You can paste text in this app and let this read aloud.
             </TextBlock>
             <Button x:Name="readAloudButton" Click="readAloudButton_Click">Read</Button>
         </StackPanel>
