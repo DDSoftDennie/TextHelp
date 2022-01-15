@@ -2,18 +2,18 @@
 using CSSpeech.Model;
 using Microsoft.CognitiveServices.Speech;
 using System;
-using Newtonsoft.Json;
+
 using System.Threading.Tasks;
-using CSAuth;
+
 using System.Net.Http;
-using System.Text;
+
 using System.IO;
-using System.Media;
 
 namespace CSSpeech.Services
 {
     public class RESTSpeechService : ISpeechService
     {
+  
         private string _key ="", _region="", _endpoint="", _lang="";
         private string _requestBody="";
         public static readonly string FetchTokenUri = "https://northeurope.api.cognitive.microsoft.com/sts/v1.0/issueToken";
@@ -32,11 +32,7 @@ namespace CSSpeech.Services
            _speech = new Speech();
             Authenticate(authentication,true);
         }
-        public SpeechConfig Authenticate(Auth authentication)
-        {
-            throw new NotImplementedException();
-           
-        }
+    
 
         public void Authenticate(Auth authentication, bool rest = true)
         {
@@ -54,10 +50,7 @@ namespace CSSpeech.Services
 
         }
 
-        public string GetAutorizationToken()
-        {
-            throw new NotImplementedException();
-        }
+   
 
         public async Task SetAutorizationTokenAsync(string fetchUri, string subscriptionKey)
         {
@@ -68,24 +61,8 @@ namespace CSSpeech.Services
           
         }
 
-        public Task<int> ReadAloud(string text)
-        {
-            throw new NotImplementedException();
-        }
 
-        public async Task<string> ReadAloud(string text, string accessToken)
-        {
-
-            throw new NotImplementedException();
-
-            //if (result == null || result.ToString() == null)
-            //{
-            //    return "";
-            //} else
-           
-            //return result.ToString();
-           
-        }
+       
         public async Task WriteToFile(string text, string name)
         {
             string path = @"C:\DDSoft\AI Demos\TextHelp\TextHelp\Output\" + name + ".mp3";
@@ -105,16 +82,6 @@ namespace CSSpeech.Services
 
             readStream.Close();
             writeStream.Close();
-
-          //  SoundPlayer player = new System.Media.SoundPlayer(filename);
-          //  player.PlaySync();
-          
-            
-            //using (var stream = File.Create(path))
-            //{
-            //    fileStream.Seek(0, SeekOrigin.Begin);
-            //    fileStream.CopyTo(stream);
-            //}
 
         }
 
@@ -158,6 +125,41 @@ namespace CSSpeech.Services
 
         public int GetTotalCharacters() => _speech?.TotalChar != null ? _speech.TotalChar : 0;
 
-  
+
+
+        #region NotUsed
+
+
+        public SpeechConfig Authenticate(Auth authentication)
+        {
+            throw new NotImplementedException();
+
+        }
+
+        public string GetAutorizationToken()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> ReadAloud(string text)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<string> ReadAloud(string text, string accessToken)
+        {
+
+            throw new NotImplementedException();
+
+            //if (result == null || result.ToString() == null)
+            //{
+            //    return "";
+            //} else
+
+            //return result.ToString();
+
+        }
+        #endregion
+
     }
 }

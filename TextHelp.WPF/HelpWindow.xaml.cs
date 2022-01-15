@@ -27,7 +27,7 @@ namespace TextHelp.WPF
 
         private async void readAloudButton_Click(object sender, RoutedEventArgs e)
         {
-            string[] text = new string[6];
+            string[] text = new string[5];
             text[0] = "How do I use this app?";
             text[1] = "You can use this app to write text and listen to the text.";
             text[2] = "You can use this app together with someone with a learning disability,";

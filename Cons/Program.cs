@@ -29,16 +29,16 @@ display.DisplayFooter();
 
 
     //SDK
-    (string, string) credentials = ((string, string))display.AskSpeechCredentials();
-    display.DisplayText(speech.Authenticate(credentials));
+   (string, string) credentials = ((string, string))display.AskSpeechCredentials();
+   display.DisplayText(speech.Authenticate(credentials));
    
 
     //REST
-   // (string, string, string) credentials = ((string, string, string))display.AskSpeechRESTCredentials();
-   //  display.DisplayText(speech.AuthenticateREST(credentials));
+    //(string, string, string) credentials = ((string, string, string))display.AskSpeechRESTCredentials();
+    //display.DisplayText(speech.AuthenticateREST(credentials));
   
 
-     display.DrawLine(5);
+    display.DrawLine(5);
     string lang = "en-EN";
     display.DisplayText(speech.SetLanguage(lang));
     display.DrawLine(5);
@@ -50,14 +50,14 @@ display.DisplayFooter();
       
 
         //REST Save to file
-       // await speech.SetAcessToken(credentials.Item3, credentials.Item1);
-       // string fileName = display.AskInput("Enter file name:");
-       // await speech.WriteToFile(input, fileName);
+        //await speech.SetAcessToken(credentials.Item3, credentials.Item1);
+        //string fileName = display.AskInput("Enter file name:");
+        //await speech.WriteToFile(input, fileName);
 
         //SDK Speech and Read Aloud
          display.DisplayText(await speech.ReadAloud(input));
+         display.DisplayText(speech.GetTotalCharacters());
 
-        display.DisplayText(speech.GetTotalCharacters());
         display.DrawLine(5);
         mayContinue = display.AskToContinue("speak");
     } while (mayContinue);
