@@ -364,3 +364,5 @@ FodyWeavers.xsd
 
 # Custom DD
 cred.txt
+Cons/Cred/
+Cons/Cred/Cred.cs

@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Cons.Controllers;
 using System.Threading.Tasks;
+using Cons.Cred;
 
 DisplayController display = new DisplayController();
 SpeechController speech = new SpeechController();
@@ -25,12 +26,11 @@ display.DisplayFooter();
 
  async Task SpeechMethod()
 {
-  
-
-
     //SDK
-   (string, string) credentials = ((string, string))display.AskSpeechCredentials();
-     display.DisplayText(speech.Authenticate(credentials));
+    (string, string) credentials;
+    credentials.Item1 = Cred.LanguageKey();
+    credentials.Item2 = Cred.LanguageRegion();
+    display.DisplayText(speech.Authenticate(credentials));
    
 
     //REST
@@ -57,7 +57,6 @@ display.DisplayFooter();
         //SDK Speech and Read Aloud
         display.DisplayText(await speech.ReadAloud(input));
         display.DisplayText(speech.GetTotalCharacters());
-
         display.DrawLine(5);
         mayContinue = display.AskToContinue("speak");
     } while (mayContinue);
@@ -83,11 +82,16 @@ async Task TranslateMethod()
 
 async Task TranslateAndSpeakMethod()
 {
-    (string, string, string) translateCredentials = ((string, string, string))display.AskTranslateCredentials();
+    (string, string, string) translateCredentials;
+    translateCredentials.Item1 = Cred.LocationKey();
+    translateCredentials.Item2 = Cred.LocationRegion();
+    translateCredentials.Item3 = Cred.LocationEndPoint();
     display.DisplayText(translate.Authenticate(translateCredentials));
     display.DrawLine(10);
 
-    (string, string) speechCredentials = ((string, string))display.AskSpeechCredentials();
+    (string, string) speechCredentials;
+    speechCredentials.Item1 = Cred.LanguageKey();
+    speechCredentials.Item2 = Cred.LanguageRegion();
     display.DisplayText(speech.Authenticate(speechCredentials));
     display.DrawLine(10);
     string lang = "en-EN";

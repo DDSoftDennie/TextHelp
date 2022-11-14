@@ -49,14 +49,23 @@ namespace Cons.Controllers
 
         public async Task<string> ReadAloud(string text)
         {
-           var result  =  await _speechService.ReadAloud(text);
-            string characters = result.ToString();
+            string characters = "";
+            if(_speechService!= null)
+            {
+                var result = await _speechService.ReadAloud(text);
+                characters = result.ToString();
+            }
             return $"Speech for '{text}' performed. {characters} characters were computed.";
+
         }
 
         public async Task WriteToFile(string text, string file)
         {
-            await _speechService.WriteToFile(text, file);
+            if(_speechService!= null)
+            {
+                await _speechService.WriteToFile(text, file);
+            }
+          
         }
 
         public string GetTotalCharacters()
