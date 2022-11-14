@@ -28,8 +28,8 @@ display.DisplayFooter();
 {
     //SDK
     (string, string) credentials;
-    credentials.Item1 = Cred.LanguageKey();
-    credentials.Item2 = Cred.LanguageRegion();
+    credentials.Item1 = Cred.SpeechKey();
+    credentials.Item2 = Cred.SpeechRegion();
     display.DisplayText(speech.Authenticate(credentials));
    
 
@@ -83,15 +83,15 @@ async Task TranslateMethod()
 async Task TranslateAndSpeakMethod()
 {
     (string, string, string) translateCredentials;
-    translateCredentials.Item1 = Cred.LocationKey();
-    translateCredentials.Item2 = Cred.LocationRegion();
-    translateCredentials.Item3 = Cred.LocationEndPoint();
+    translateCredentials.Item1 = Cred.TranslatorKey();
+    translateCredentials.Item2 = Cred.TranslatorRegion();
+    translateCredentials.Item3 = Cred.TranslatorEndPoint();
     display.DisplayText(translate.Authenticate(translateCredentials));
     display.DrawLine(10);
 
     (string, string) speechCredentials;
-    speechCredentials.Item1 = Cred.LanguageKey();
-    speechCredentials.Item2 = Cred.LanguageRegion();
+    speechCredentials.Item1 = Cred.SpeechKey();
+    speechCredentials.Item2 = Cred.SpeechRegion();
     display.DisplayText(speech.Authenticate(speechCredentials));
     display.DrawLine(10);
     string lang = "en-EN";
