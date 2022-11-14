@@ -64,8 +64,11 @@ display.DisplayFooter();
 
 async Task TranslateMethod()
 {
-    (string, string, string) credentials = ((string, string, string))display.AskTranslateCredentials();
-    display.DisplayText(translate.Authenticate(credentials));
+    (string, string, string) translateCredentials;
+    translateCredentials.Item1 = Cred.TranslatorKey();
+    translateCredentials.Item2 = Cred.TranslatorRegion();
+    translateCredentials.Item3 = Cred.TranslatorEndPoint();
+    display.DisplayText(translate.Authenticate(translateCredentials));
     display.DrawLine(10);
 
     bool mayContinue;
