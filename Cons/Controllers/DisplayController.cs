@@ -40,6 +40,7 @@ namespace Cons.Controllers
 
         public string AskInput(string question)
         {
+            Console.WriteLine();
             Console.WriteLine(question);
             Console.Write("> ");
             var input =  Console.ReadLine();
@@ -93,6 +94,7 @@ namespace Cons.Controllers
         public  bool AskToContinue(string task)
         {
             Console.WriteLine($"Press 'y' to {task} again.");
+            Console.Write("> ");
             return Console.ReadKey().Key == ConsoleKey.Y;
         }
 
